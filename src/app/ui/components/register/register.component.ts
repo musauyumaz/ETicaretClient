@@ -6,6 +6,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent } from 'src/app/base/base.component';
 import { CreateUser } from 'src/app/contracts/users/create_user';
 import { User } from 'src/app/entities/user';
 import { UserService } from 'src/app/services/common/models/user.service';
@@ -20,12 +22,15 @@ import {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends BaseComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private toastrService: CustomToastrService
-  ) {}
+    private toastrService: CustomToastrService,
+    spinner: NgxSpinnerService
+  ) {
+    super(spinner);
+  }
 
   frm: FormGroup;
   ngOnInit(): void {

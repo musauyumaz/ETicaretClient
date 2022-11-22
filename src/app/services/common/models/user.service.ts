@@ -8,9 +8,9 @@ import { HttpClientService } from '../http-client.service';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private httpClientService: HttpClientService) { }
+  constructor(private httpClientService: HttpClientService) {}
 
-  async create(user: User) : Promise<CreateUser>{
+  async create(user: User): Promise<CreateUser> {
     const observable: Observable<CreateUser | User> =
       this.httpClientService.post<CreateUser | User>(
         {
@@ -19,6 +19,17 @@ export class UserService {
         user
       );
 
-    return await firstValueFrom(observable) as CreateUser;
+    return (await firstValueFrom(observable)) as CreateUser;
+  }
+  async login(usernameOrEmail: string, password: string, callBackFunction? : () => void) : Promise<void> {
+    const observable : Observable<any> = this.httpClientService.post(
+      {
+        controller: 'users',
+        action: 'login',
+      },
+      { usernameOrEmail, password }
+    );
+      await firstValueFrom(observable);
+      callBackFunction();
   }
 }
