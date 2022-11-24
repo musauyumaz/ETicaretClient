@@ -8,6 +8,7 @@ import {
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
+import { AuthService, _isAuthenticated } from 'src/app/services/common/auth.service';
 import {
   CustomToastrService,
   ToastrMessageType,
@@ -22,22 +23,23 @@ export class AuthGuard implements CanActivate {
     private jwtHelper: JwtHelperService,
     private router: Router,
     private toastrService: CustomToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private authService : AuthService
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.spinner.show(SpinnerType.BallAtom);
-    const token: string = localStorage.getItem('accessToken');
+    // const token: string = localStorage.getItem('accessToken');
 
-    // const decodeToken = this.jwtHelper.decodeToken(token);
-    // const expirationDate : Date = this.jwtHelper.getTokenExpirationDate(token);
-    let expired: boolean;
-    try {
-      expired = this.jwtHelper.isTokenExpired(token);
-    } catch (error) {
-      expired = true;
-    }
-    if (!token || expired) {
+    // // const decodeToken = this.jwtHelper.decodeToken(token);
+    // // const expirationDate : Date = this.jwtHelper.getTokenExpirationDate(token);
+    // let expired: boolean;
+    // try {
+    //   expired = this.jwtHelper.isTokenExpired(token);
+    // } catch (error) {
+    //   expired = true;
+    // }
+    if (!_isAuthenticated) {
       this.router.navigate(['login'], {
         queryParams: { returnUrl: state.url },
       });
