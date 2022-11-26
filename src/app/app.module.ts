@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
 import {
+  FacebookLoginProvider,
   GoogleLoginProvider,
   SocialAuthServiceConfig,
   SocialLoginModule,
@@ -49,6 +50,10 @@ import {
               '397808254240-6o3qquv1bol68ckcqva0f5qtq3ff70k4.apps.googleusercontent.com'
             ),
           },
+          {
+            id : FacebookLoginProvider.PROVIDER_ID,
+            provider : new FacebookLoginProvider('824176348909932')
+          }
         ],
         onError: (err) => console.log(err),
       } as SocialAuthServiceConfig,
