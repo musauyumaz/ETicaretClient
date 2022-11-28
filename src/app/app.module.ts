@@ -8,7 +8,7 @@ import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
 import {
@@ -17,6 +17,7 @@ import {
   SocialAuthServiceConfig,
   SocialLoginModule,
 } from '@abacritt/angularx-social-login';
+import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -35,7 +36,7 @@ import {
         allowedDomains: ['localhost:7071'],
       },
     }),
-    SocialLoginModule
+    SocialLoginModule,
   ],
   providers: [
     { provide: 'baseUrl', useValue: 'https://localhost:7071/api', multi: true },
@@ -51,12 +52,17 @@ import {
             ),
           },
           {
-            id : FacebookLoginProvider.PROVIDER_ID,
-            provider : new FacebookLoginProvider('824176348909932')
-          }
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('824176348909932'),
+          },
         ],
         onError: (err) => console.log(err),
       } as SocialAuthServiceConfig,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorHandlerInterceptorService,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
