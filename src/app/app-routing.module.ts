@@ -55,6 +55,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'products/:pageNo',
+    loadChildren: () =>
+      import('./ui/components/products/products.module').then(
+        (module) => module.ProductsModule
+      ),
+  },
+  {
     path: 'register',
     loadChildren: () =>
       import('./ui/components/register/register.module').then(
