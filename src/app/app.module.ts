@@ -18,6 +18,7 @@ import {
   SocialLoginModule,
 } from '@abacritt/angularx-social-login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
+import {List_Basket_Item  } from './contracts/basket/list_basket_item';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],

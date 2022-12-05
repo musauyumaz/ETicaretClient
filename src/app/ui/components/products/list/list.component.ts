@@ -1,29 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { BaseUrl } from 'src/app/contracts/base_url';
+import { Create_Basket_Item } from 'src/app/contracts/basket/create_basket_item';
 import { List_Product } from 'src/app/contracts/list_product';
+import { BasketService } from 'src/app/services/common/models/basket.service';
 import { FileService } from 'src/app/services/common/models/file.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent extends BaseComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private fileService : FileService
-  ) {}
+    private fileService: FileService,
+    private basketService: BasketService,
+    spinner: NgxSpinnerService,
+    private customToastrService: CustomToastrService
+  ) {
+    super(spinner);
+  }
 
   currentPageNo: number;
   totalProductCount: number;
   totalPageCount: number;
   pageSize: number = 15;
   pageList: number[] = [];
-  baseUrl:BaseUrl;
+  baseUrl: BaseUrl;
 
   products: List_Product[];
   async ngOnInit() {
@@ -49,9 +59,11 @@ export class ListComponent implements OnInit {
           stock: p.stock,
           createdDate: p.createdDate,
           updatedDate: p.updatedDate,
-          imagePath:`${p.productImageFiles.length
-            ? p.productImageFiles.find((p) => p.showcase).path
-            : ''}` ,
+          imagePath: `${
+            p.productImageFiles.length
+              ? p.productImageFiles.find((p) => p.showcase).path
+              : ''
+          }`,
           productImageFiles: p.productImageFiles,
         };
 
@@ -72,5 +84,15 @@ export class ListComponent implements OnInit {
         for (let i = this.currentPageNo - 3; i <= this.currentPageNo + 3; i++)
           this.pageList.push(i);
     });
+  }
+
+  async addToBasket(product: List_Product) {
+    this.showSpinner(SpinnerType.BallAtom)
+    let _basketItem: Create_Basket_Item = new Create_Basket_Item();
+    _basketItem.productId = product.id;
+    _basketItem.quantity = 1;
+    await this.basketService.add(_basketItem);
+    this.hideSpinner(SpinnerType.BallAtom);
+    this.customToastrService.message("Ürün Sepete Eklenmiştir.","Sepete Eklendi",{messageType:ToastrMessageType.Success,position:ToastrPosition.TopRight})
   }
 }

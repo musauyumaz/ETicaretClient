@@ -23,9 +23,9 @@ export class AppComponent {
     private router: Router,
     private httpClientService: HttpClientService
   ) {
-    httpClientService.put({ controller: 'baskets' },{basketItemId:"af60d5eb-553f-4f56-8120-50b4325a9cfa",quantity:125}).subscribe((data) => {
-      debugger;
-    });
+    // httpClientService.put({ controller: 'baskets' },{basketItemId:"af60d5eb-553f-4f56-8120-50b4325a9cfa",quantity:125}).subscribe((data) => {
+    //   debugger;
+    // });
 
     authService.identityCheck();
   }
