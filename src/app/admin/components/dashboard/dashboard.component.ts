@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
+import { BaseComponent} from 'src/app/base/base.component';
 import { HubUrls } from 'src/app/constants/hub-urls';
 import { ReceiveFunctions } from 'src/app/constants/receive-functions';
 import {
-  AlertifyOptions,
   AlertifyService,
   MessageType,
   Position,
@@ -23,17 +22,31 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     private signalRService: SignalRService
   ) {
     super(spinner);
+    signalRService.start(HubUrls.OrderHub);
     signalRService.start(HubUrls.ProductHub);
   }
 
   ngOnInit(): void {
     this.signalRService.on(
+      ReceiveFunctions.OrderAddedMessageReceiveFunction,
+      (message) => {
+        this.alertify.message(message, {
+          position: Position.TopCenter,
+          messageType: MessageType.Notify,
+        });
+      }
+    );
+    this.signalRService.on(
       ReceiveFunctions.ProductAddedMessageReceiveFunction,
       (message) => {
-        this.alertify.message(message,{position : Position.TopRight,messageType: MessageType.Notify});
+        this.alertify.message(message, {
+          position: Position.TopRight,
+          messageType: MessageType.Notify,
+        });
       }
     );
   }
+
   m() {
     this.alertify.message('Merhaba', {
       messageType: MessageType.Success,
