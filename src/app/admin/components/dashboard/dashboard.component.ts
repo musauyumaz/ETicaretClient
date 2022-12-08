@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BaseComponent} from 'src/app/base/base.component';
+import { BaseComponent } from 'src/app/base/base.component';
 import { HubUrls } from 'src/app/constants/hub-urls';
 import { ReceiveFunctions } from 'src/app/constants/receive-functions';
 import {
@@ -22,12 +22,13 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     private signalRService: SignalRService
   ) {
     super(spinner);
-    signalRService.start(HubUrls.OrderHub);
-    signalRService.start(HubUrls.ProductHub);
+    // signalRService.start(HubUrls.OrderHub);
+    // signalRService.start(HubUrls.ProductHub);
   }
 
   ngOnInit(): void {
     this.signalRService.on(
+      HubUrls.OrderHub,
       ReceiveFunctions.OrderAddedMessageReceiveFunction,
       (message) => {
         this.alertify.message(message, {
@@ -37,6 +38,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       }
     );
     this.signalRService.on(
+      HubUrls.ProductHub,
       ReceiveFunctions.ProductAddedMessageReceiveFunction,
       (message) => {
         this.alertify.message(message, {
