@@ -22,7 +22,6 @@ import {
 } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
-import { ProductService } from 'src/app/services/common/models/product.service';
 
 declare var $: any;
 
