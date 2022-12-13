@@ -5,18 +5,22 @@
       <label for="username" class="form-label">Kullanıcı Adı</label>
       <input #txtUsernameOrEmail type="text" class="form-control" id="username" placeholder="Kullanıcı Adı & Email" />
       <small class="form-text invalid-feedback" style="color: red">***</small>
-
     </div>
     <div class="form-group">
       <label for="password" class="form-label">Şifre</label>
       <input #txtPassword type="password" class="form-control" id="password" placeholder="Şifre" />
     </div>
 
-    <asl-google-signin-button class="mt-2" style="float: left;"></asl-google-signin-button>
-    <img src="../../../../assets/facebook.png" class="mt-1" style="width: 45px; height: 43px; cursor: pointer;" (click)="facebookLogin()"/>
-    <br>
-    <button type="submit" style="margin-top: 5px;" class="btn btn-primary"
-      (click)="login(txtUsernameOrEmail.value,txtPassword.value)">Giriş Yap</button>
+    <asl-google-signin-button class="mt-2" style="float: left"></asl-google-signin-button>
+    <img src="../../../../assets/facebook.png" class="mt-1" style="width: 45px; height: 43px; cursor: pointer"
+      (click)="facebookLogin()" />
+    <br />
+    <button type="submit" style="margin-top: 5px" class="btn btn-primary"
+      (click)="login(txtUsernameOrEmail.value, txtPassword.value)">
+      Giriş Yap
+    </button>
+    <a style="margin-top: 5px; margin-left: 5px" routerLink="/password-reset" class="btn btn-secondary">Şifremi
+      Unuttum</a>
   </div>
   <div class="col-md-3"></div>
 </div>
