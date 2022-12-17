@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { AuthGuard } from './guards/common/auth.guard';
-import { BasketsComponent } from './ui/components/baskets/baskets.component';
 import { HomeComponent } from './ui/components/home/home.component';
 
 const routes: Routes = [
@@ -33,6 +32,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin/components/order/order.module').then(
             (module) => module.OrderModule
+          ),
+          canActivate: [AuthGuard],
+      },
+      {
+        path: 'authorize-menu',
+        loadChildren: () =>
+          import('./admin/components/authorize-menu/authorize-menu.module').then(
+            (module) => module.AuthorizeMenuModule
           ),
           canActivate: [AuthGuard],
       },
