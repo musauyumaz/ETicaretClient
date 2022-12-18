@@ -5,6 +5,7 @@ import { OrderModule } from './order/order.module';
 import { CustomerModule } from './customer/customer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
+import { RoleModule } from './role/role.module';
 
 
 
@@ -16,7 +17,8 @@ import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
     OrderModule,
     CustomerModule,
     DashboardModule,
-    AuthorizeMenuModule
+    AuthorizeMenuModule,
+    RoleModule
   ]
 })
 export class ComponentsModule { }

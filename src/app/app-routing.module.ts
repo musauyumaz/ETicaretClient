@@ -17,7 +17,7 @@ const routes: Routes = [
           import('./admin/components/customer/customer.module').then(
             (module) => module.CustomerModule
           ),
-          canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'products',
@@ -25,7 +25,7 @@ const routes: Routes = [
           import('./admin/components/products/products.module').then(
             (module) => module.ProductsModule
           ),
-          canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'orders',
@@ -33,15 +33,23 @@ const routes: Routes = [
           import('./admin/components/order/order.module').then(
             (module) => module.OrderModule
           ),
-          canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'authorize-menu',
         loadChildren: () =>
-          import('./admin/components/authorize-menu/authorize-menu.module').then(
-            (module) => module.AuthorizeMenuModule
+          import(
+            './admin/components/authorize-menu/authorize-menu.module'
+          ).then((module) => module.AuthorizeMenuModule),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'roles',
+        loadChildren: () =>
+          import('./admin/components/role/role.module').then(
+            (module) => module.RoleModule
           ),
-          canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
     ],
     canActivate: [AuthGuard],
