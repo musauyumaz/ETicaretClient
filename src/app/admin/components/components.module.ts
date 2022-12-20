@@ -6,6 +6,7 @@ import { CustomerModule } from './customer/customer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
 import { RoleModule } from './role/role.module';
+import { UserModule } from './user/user.module';
 
 
 
@@ -18,7 +19,8 @@ import { RoleModule } from './role/role.module';
     CustomerModule,
     DashboardModule,
     AuthorizeMenuModule,
-    RoleModule
+    RoleModule,
+    UserModule
   ]
 })
 export class ComponentsModule { }
