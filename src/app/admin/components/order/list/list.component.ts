@@ -47,8 +47,8 @@ export class ListComponent extends BaseComponent implements OnInit {
         this.paginator ? this.paginator.pageIndex : 0,
         this.paginator ? this.paginator.pageSize : 5,
         () => this.hideSpinner(SpinnerType.BallAtom),
-        (errorMessage) =>
-          this.alertifyService.message(errorMessage, {
+        (errorMessage : any) =>
+          this.alertifyService.message(errorMessage.message, {
             dismissOthers: true,
             messageType: MessageType.Error,
             position: Position.TopRight,
