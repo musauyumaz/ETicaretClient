@@ -32,6 +32,13 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="qrcode">
+      <th mat-header-cell *matHeaderCellDef width="30"></th>
+      <td mat-cell *matCellDef="let element">
+        <img style="cursor: pointer;" src="../../../../../assets/qr.png" width="25" height="25"  (click)="showQRCode(element.id)"/>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef width="30"></th>
       <td mat-cell *matCellDef="let element">

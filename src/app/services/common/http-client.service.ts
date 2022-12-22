@@ -28,7 +28,10 @@ export class HttpClientService {
         requestParameter.queryString ? `?${requestParameter.queryString}` : ''
       }`;
 
-    return this.httpClient.get<T>(url, { headers: requestParameter.headers });
+    return this.httpClient.get<T>(url, {
+      headers: requestParameter.headers,
+      responseType: requestParameter.responseType as 'json',
+    });
   }
   post<T>(
     requestParameter: Partial<RequestParameters>,
@@ -42,6 +45,7 @@ export class HttpClientService {
       }`;
     return this.httpClient.post<T>(url, body, {
       headers: requestParameter.headers,
+      responseType: requestParameter.responseType as 'json',
     });
   }
   put<T>(
@@ -56,6 +60,7 @@ export class HttpClientService {
       }`;
     return this.httpClient.put<T>(url, body, {
       headers: requestParameter.headers,
+      responseType: requestParameter.responseType as 'json',
     });
   }
   delete<T>(
@@ -70,6 +75,7 @@ export class HttpClientService {
       }`;
     return this.httpClient.delete<T>(url, {
       headers: requestParameter.headers,
+      responseType: requestParameter.responseType as 'json',
     });
   }
 }
@@ -83,4 +89,6 @@ export class RequestParameters {
   headers?: HttpHeaders;
   baseUrl?: string;
   fullEndPoint?: string;
+
+  responseType?: string = 'json';
 }
