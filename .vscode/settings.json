@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/701c7481-d20f-4a3e-b8d6-c2401aef09a5/AppServices/subscriptions/701c7481-d20f-4a3e-b8d6-c2401aef09a5/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/ETicaretAPIAngular20230101",
+    "appService.deploySubpath": "dist"
+}
